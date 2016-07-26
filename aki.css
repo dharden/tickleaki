@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+body {
+	cursor: url(pinkhand.png),auto;
+	font-family: 'Press Start 2P', cursive;
+	line-height: 1.88889;
+	color: #ffffff;
+	text-shadow: 2px 2px 2px #000; 
+	font-size: xx-large;
+	background: #fff url(turquoise_brick.gif); 
+	margin: 0; 
+	padding: 0;
+	
+}
+
+#main {
+	width: 700px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+#headText {
+	color: #FF0099;
+	margin: 0;
+	padding: 0;
+	font-size: xx-large;
+	height: 60px;
+
+}
+
+#pics {
+    width: 30em;
+    height: 3em;
+    background-color: #108040;
+}
+
+
+  div.pics.swipeleft {
+    background-color: #7ACEF4;
+  }
+  div.pics.swiperight {
+    background-color: #FF0099;
+  }
+

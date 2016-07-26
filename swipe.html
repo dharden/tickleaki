@@ -1,0 +1,89 @@
+<html>
+<head>
+    <title> Tickle Aki!</title>
+
+
+    <link href="http://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="aki.css">
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="jquery.touchSwipe.min.js"></script>
+
+</head>
+<body>
+    <audio id="akisong" src="aki.mp3" autoplay></audio>
+    <h3 id="title">Tickle Aki 80,000 times!</h3>
+    <div id="aki">
+        <img id="akipic" src="madaki.png" />
+    </div>
+
+    <script type="text/javascript">
+
+
+
+    $(function(){
+
+    console.log("start log");
+
+    var gameover = false;
+    var count_happy = 0;
+    var magic_tickle_distance = 80000;
+    var highscoretext = " High Score: ";
+    var high_score = localStorage.getItem('aki_high_score');
+
+    if (isNaN(parseFloat(high_score)) && !isFinite(high_score)) {
+     high_score = 0;
+    }
+
+       $("#aki").swipe( {
+        //Generic swipe handler for all directions
+        swipe:function(event, direction, distance, duration, fingerCount) {
+          var music = $('#akisong')[0];
+          if (music.paused) {
+            music.play();
+          }
+          $('#akipic').attr("src", "madaki.png");
+      },
+
+      swipeStatus:function(event, phase, direction, distance, duration, fingers) {
+        if (!gameover){
+            if(distance > 200) {
+                $('#akipic').attr("src", "happyaki.png");
+
+                count_happy += distance;
+                console.log(count_happy);
+                document.getElementById("title").innerHTML = "Score: " + count_happy;
+            }
+        }
+        threshold:0
+    }
+});
+
+// game timer currently sent to 10000 milliseconds aka 10 seconds
+window.setTimeout(closeHeadText,10000);
+
+// function to swap out game with YAY screen and total counts
+function closeHeadText()
+{ 
+    gameover = true;
+
+if (count_happy > high_score) {
+     localStorage.setItem('aki_high_score', count_happy);
+     high_score = count_happy;
+    }
+
+ if (count_happy > magic_tickle_distance) {
+
+     document.getElementById("aki").innerHTML="<img src ='youwin.gif'><p>" + highscoretext + high_score;
+    }
+
+
+else {
+    document.getElementById("aki").innerHTML="<img src ='youlose.gif'><p>" + highscoretext + high_score;
+    }
+}
+
+});
+</script>
+
+</body>
+</html>
